@@ -1,0 +1,63 @@
+form{
+    padding: 1em;
+    border: 1px solid $secondary-color;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+}
+form .messages .success{
+    color: $success-color;
+}
+form .messages .error{
+    color: $error-color;
+}
+form fieldset{
+    border-color: $primary-color;
+    padding: 0;
+    padding-left: .1em;
+    border-radius: 4px;
+}
+form fieldset:active, form fieldset:focus{
+    border-color: $primary-light-color;
+
+    legend{
+        color: $primary-light-color;
+    }
+}
+form fieldset legend{
+    font-size: $little-text;
+    color: $primary-color;
+}
+form fieldset input{
+    background: none;
+    border: none;
+    width: 100%;
+    color: $primary-color;
+    font-size: $regular-text;
+    padding: .5em 0;
+    padding-left: 1em;
+}
+form fieldset input::placeholder {
+    color: $primary-color;
+    opacity: .3;
+}
+form fieldset input:active, form fieldset input:focus{
+    background: none;
+    height: 100%;
+    width: 100%;
+    border: none;
+    width: 100%;
+    outline: none;
+}
+form fieldset input:valid{
+    color: $success-color;
+    background: none;
+}
+form fieldset input:invalid{
+    color: $error-color;
+}
+form p{
+    margin: 0;
+}

@@ -1,0 +1,28 @@
+nav{
+    height: 5vh;
+    display: flex;
+    flex-direction: row;
+    padding: 1em 3em;
+    align-items: center;
+    justify-content: space-between;
+}
+nav img{
+    height: 3vh;
+    width: auto;
+}
+nav .nav-part{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+nav .nav-part .nav-link{
+    text-decoration: none;
+    color: $text-color;
+    font-weight: $regular-font;
+    display: flex;
+    align-items: center;
+    transition: all .3s ease;
+}
+nav .nav-part .nav-link:hover{
+    opacity: .8;
+}

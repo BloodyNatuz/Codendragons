@@ -1,0 +1,22 @@
+// IMPORTS
+@import 'base/color';
+@import 'base/typo';
+@import 'components/btns';
+@import 'components/form';
+@import 'layout/navbar';
+@import 'pages/signin';
+@import 'pages/signup';
+
+// GENERAL
+body{
+    margin: 0;
+    padding: 0;
+    background-color: $bg-color;
+    color: $text-color;
+    font-family: $primary-font;
+    font-family: $secondary-font;
+}
+  
+h1{
+    font-family: $primary-font;
+}
