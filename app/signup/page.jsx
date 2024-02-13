@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-
+import { postgresConnectionString, sql } from "@vercel/postgres";
   
   export default function Signup() {
     const [formData, setFormData] = useState({
@@ -31,7 +31,9 @@ import Link from "next/link";
         console.log(formData.email)
         console.log(formData.username)
         console.log(formData.password)
-        // Add your form submission logic here
+
+        
+        sql`INSERT INTO users (email, username) VALUES (${formData.email}, ${formData.username});`
       }
     };
 
