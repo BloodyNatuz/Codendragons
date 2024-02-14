@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { postgresConnectionString, sql } from "@vercel/postgres";
   
   export default function Signup() {
     const [formData, setFormData] = useState({
@@ -19,21 +18,24 @@ import { postgresConnectionString, sql } from "@vercel/postgres";
       });
     };
   
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
       e.preventDefault();
 
       if (formData.password !== formData.confirmPassword){
         console.log("Mots de passe ne correspondent pas")
-        console.log(formData.password)
-        console.log(formData.confirmPassword)
+        console.log(formData.password + ' pas égal à ' + formData.confirmPassword)
       } else{
-
         console.log(formData.email)
         console.log(formData.username)
         console.log(formData.password)
 
-        
-        sql`INSERT INTO users (email, username) VALUES (${formData.email}, ${formData.username});`
+        const response = await fetch('/api/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData)
+        })
       }
     };
 
