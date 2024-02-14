@@ -1,17 +1,29 @@
-import { sql } from "@vercel/postgres";
+'use client'
 
-export default async function Cart() {
-  const { rows } = await sql`SELECT * from USERS`;
+import { useState, useEffect } from "react"
+
+export default function Cart() {
+  const [datas, setDatas] = useState(null)
+  const [isLoading, setLoading] = useState(false)
+
+  useEffect(() => {
+    const fetchDatas = async () => {
+      const res = await fetch ('/api/users')
+      const data = await res.json()
+      setDatas(data)
+      setLoading(true)
+    }
+    fetchDatas();
+  }, [])
+
+  if (datas) {
+    console.log(datas.username)
+    console.log(datas.email)
+  }
 
   return (
-    <div>
-      {rows.map((row) => (
-        <div>
-          <p>ID : {row.id}</p>
-          <p>Email : {row.email}</p>
-          <p>Username : {row.username}</p>
-        </div>
-      ))}
-    </div>
+    <>
+      {isLoading ? (<p>Username: {datas.username} </p>) : (<p>Chargement...</p>)}
+    </>
   );
 }
