@@ -1,0 +1,17 @@
+.appearance-null{
+    display: none;
+}
+
+.appearance-success{
+    display: block;
+    padding: 1em 2em;
+    text-align: center;
+    border: 1px solid $success-color;
+}
+
+.appearance-error{
+    display: block;
+    padding: 1em 2em;
+    text-align: center;
+    border: 1px solid $error-color;
+}
