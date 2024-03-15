@@ -51,7 +51,7 @@ export default function Signin() {
   return (
     <main className="signin">
       <img className="signin-img" src="/logo-light.svg" alt="Logo de Code & Dragons" />
-      <h1>Sign in</h1>
+      <h1>Login</h1>
       <form onSubmit={handleSubmit}>
           <fieldset>
               <legend>Email</legend>
