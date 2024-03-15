@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { NextResponse } from "next/server";
   
   export default function Signup() {
+
     const [formData, setFormData] = useState({
       email: '',
       username: '',
@@ -18,24 +20,26 @@ import Link from "next/link";
       });
     };
   
+    // Message states
+    const [appearance, setAppearance] = useState('appearance-null');
+    const [messageContent, setMessageContent] = useState(' ');
+
     const handleSubmit = async (e) => {
       e.preventDefault();
 
       if (formData.password !== formData.confirmPassword){
-        console.log("Mots de passe ne correspondent pas")
-        console.log(formData.password + ' pas égal à ' + formData.confirmPassword)
+        setAppearance('appearance-error');
+        setMessageContent('Les mots de passe ne correspondent pas');
       } else{
-        console.log(formData.email)
-        console.log(formData.username)
-        console.log(formData.password)
-
-        const response = await fetch('/api/users', {
+        const response = await fetch('/api/signup', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(formData)
         })
+        setAppearance('appearance-success');
+        setMessageContent('Votre compte a été créé avec succès !');
       }
     };
 
@@ -45,6 +49,9 @@ import Link from "next/link";
         <h1>Sign up</h1>
         
         <form onSubmit={handleSubmit}>
+          <div className={appearance}>
+            <p>{messageContent}</p>
+          </div>
           <fieldset>
               <legend>Email</legend>
               <input type="email" name="email" placeholder="exemple@mail.com" value={formData.email} onChange={handleInputChange}/>
@@ -62,7 +69,7 @@ import Link from "next/link";
               <input type="password" name="confirmPassword" placeholder="SuperPassw0rd!" value={formData.confirmPassword} onChange={handleInputChange}/>
           </fieldset>
           <input className="primary-btn" type="submit" value="Sign up" />
-          <p>Already have an account? <Link to='/signin' className="tertiary-btn" href="/signin">Sign in.</Link></p>
+          <p>Already have an account? <Link to='/signin' className="tertiary-btn" href="/login">Sign in.</Link></p>
         </form>
       </main>
     );
