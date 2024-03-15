@@ -1,4 +1,5 @@
 import "./style/main.scss";
+import Navbar from "./components/client/navbar";
 
 export const metadata = {
   title: "Code And Dragons",
@@ -8,7 +9,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fr">
-      <body>{children}</body>
+      <body>
+        <Navbar/>  
+        {children}
+      </body>
     </html>
   );
 }
