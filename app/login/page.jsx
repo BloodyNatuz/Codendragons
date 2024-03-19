@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
+import { setCookie } from 'cookies-next';
+
 
 export default function Signin() {
   const router = useRouter()
@@ -45,8 +47,10 @@ export default function Signin() {
         // Redirection Home
         router.replace("/")
 
-        setUser(user);
-        setIsLoggedIn(true);
+        // Set cookies
+        setCookie('username', user.username);
+        setCookie('email', user.email);
+        setCookie('isLoggedIn', true);
       } else {
         setAppearance('appearance-error');
         setMessageContent('Incorrect username or password.');
