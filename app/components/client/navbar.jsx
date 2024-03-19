@@ -1,27 +1,24 @@
 'use client'
 
 import Link from "next/link";
+import { getCookie } from 'cookies-next';
+import { useEffect, useState } from "react";
 
 export default function Navbar(){
+    const [isLoggedIn, setIsLoggedIn] = useState('false');
+    const [username, setUsername] = useState('');
 
-    var isLogged = false;
 
-    function Rightnav(){
-        if (isLogged) {
-            return (
-                <div className="nav-group">
-                    <Link href='/' className="nav-link">My username</Link>
-                </div>
-            )
+    useEffect(() => {
+        const cookiesLoggedIn = getCookie('isLoggedIn');
+        const cookieUsername = getCookie('username');
+        if (cookiesLoggedIn !== undefined && cookiesLoggedIn) {
+            setIsLoggedIn(cookiesLoggedIn);
+            setUsername(cookieUsername);
         } else {
-            return (
-                <div className="nav-group">
-                    <Link href='/login' className="nav-link">Login</Link>
-                    <Link href='/signup' className="nav-link">Signup</Link>
-                </div>
-            )
+            setIsLoggedIn(false);
         }
-    }
+    }, []);
 
     return (
         <nav>
@@ -36,7 +33,21 @@ export default function Navbar(){
                 <Link href='/' className="nav-link">About</Link>
                 <Link href='/' className="nav-link">Contact</Link>
             </div>
-            <Rightnav/>
+            <div className="nav-group">
+                {
+                    isLoggedIn
+                    ? (
+                        
+                        <Link href='/profile'>{username}</Link>
+                    )
+                    : (
+                        <>
+                            <Link href='/login'>Login</Link>
+                            <Link href='/signup'>Signup</Link>
+                        </>
+                    )
+                }
+            </div>
         </nav>
     )
 }
