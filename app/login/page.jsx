@@ -2,12 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from 'next/navigation';
 import { setCookie } from 'cookies-next';
 
 
 export default function Signin() {
-  const router = useRouter()
 
   const [formData, setFormData] = useState({
     email: '',
@@ -44,8 +42,7 @@ export default function Signin() {
       if (response.ok){
         const user = await response.json()
         
-        // Redirection Home
-        router.replace("/")
+        window.location.href = "/"
 
         // Set cookies
         setCookie('username', user.username);
