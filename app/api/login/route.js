@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { sql } from "@vercel/postgres";
 import bcrypt from "bcrypt";
+import { cookies } from 'next/headers'
 
 export async function POST(request){
     const body = await request.json();
@@ -11,8 +12,11 @@ export async function POST(request){
         const passwordMatches = await bcrypt.compare(body.password, myuser.rows[0].password)
         if (passwordMatches) {
             // Réussite du match
+            cookies().set('username', myuser.rows[0].username);
+            cookies().set('email', myuser.rows[0].email);
+            cookies().set('isLoggedIn', true);
+
             return NextResponse.json(myuser.rows[0]);
-            res.status(200).json({ status: 'Success', message: 'Login successful' })
         } else{
             // Echec du match
             res.status(403).json({ status: 'Error', message: 'Invalid password' })
