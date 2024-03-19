@@ -4,7 +4,8 @@ import { useState } from "react"
 
 export default function InputWakatimeKey(){
     const [formData, setFormData] = useState({
-        wakatimekey: ''
+        wakatimekey: '',
+        wakatimeid: ''
       });
 
     const handleInputChange = (e) => {
@@ -17,7 +18,7 @@ export default function InputWakatimeKey(){
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (formData.wakatimekey.length == null){
+        if (formData.wakatimekey.length == null || formData.wakatimeid.length == null){
             // setAppearance('appearance-error');
             // setMessageContent('Aucune API Key rentrée');
         } else{
@@ -40,6 +41,11 @@ export default function InputWakatimeKey(){
                 <legend>Wakatime API Key</legend>
                 <input name="wakatimekey" type="text" value={formData.wakatimekey} onChange={handleInputChange}></input>
             </fieldset>
+            <fieldset>
+                <legend>Wakatime username</legend>
+                <input name="wakatimeid" type="text" value={formData.wakatimeid} onChange={handleInputChange}></input>
+            </fieldset>
+
             <input type="submit" />
         </form>
     )
