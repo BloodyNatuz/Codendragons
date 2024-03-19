@@ -5,12 +5,16 @@ import Link from "next/link";
 import { useRouter } from 'next/navigation';
 
 export default function Signin() {
-  const { push } = useRouter();
+  const router = useRouter()
 
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+
+  // Message states
+  const [appearance, setAppearance] = useState('appearance-null');
+  const [messageContent, setMessageContent] = useState(' ');
 
   // Données de connexion
   const [user, setUser] = useState(null);
@@ -38,11 +42,15 @@ export default function Signin() {
       if (response.ok){
         const user = await response.json()
         
+        // Redirection Home
+        router.replace("/")
+
         setUser(user);
         setIsLoggedIn(true);
-      } else (
-        console.log ("Mot de passe incorrect")
-      )
+      } else {
+        setAppearance('appearance-error');
+        setMessageContent('Incorrect username or password.');
+      }
     } else{
       console.log("Champs vide")
     }
@@ -53,6 +61,9 @@ export default function Signin() {
       <img className="signin-img" src="/logo-light.svg" alt="Logo de Code & Dragons" />
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
+          <div className={appearance}>
+            <p>{messageContent}</p>
+          </div>
           <fieldset>
               <legend>Email</legend>
               <input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="exemple@mail.com" required/>
