@@ -38,8 +38,6 @@ export default function Signin() {
       if (response.ok){
         const user = await response.json()
         
-        localStorage.setItem("username", user.username);
-        localStorage.setItem("email", user.email);
         setUser(user);
         setIsLoggedIn(true);
       } else (
