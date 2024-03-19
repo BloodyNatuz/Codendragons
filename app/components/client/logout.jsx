@@ -10,7 +10,7 @@ export default function Logout() {
         deleteCookie('isLoggedIn')
 
         // Redirection Login
-        router.replace("/login")
+        window.location.href = "/login"
     }
 
     return (
