@@ -9,17 +9,19 @@ export default async function Profile(){
     const cookieStore = cookies();
     const username = cookieStore.get('username');
     const email = cookieStore.get('email');
-    const wakatime = cookieStore.get('wakatimekey');
+    const wakatimekey = cookieStore.get('wakatimekey');
+    const wakatimeid = cookieStore.get('wakatimeid')
 
     return (
         <main>
             <p>Username: {username.value}</p>
             <p>Email: {email.value}</p>
             {
-                wakatime == undefined
+                wakatimekey == undefined || wakatimeid == undefined
                     ? <InputWakatimeKey/>
                     : (<>
-                        <p>Wakatime API Key: {wakatime.value}</p>
+                        <p>Wakatime API Key: {wakatimekey.value}</p>
+                        <p>Wakatime username: {wakatimeid.value}</p>
                         <ResetWakatimeKey/>
                     </>)
             }
