@@ -8,6 +8,7 @@ export async function POST(request){
     const username = cookieStore.get('username');
 
     cookies().set('wakatimekey', body.wakatimekey);
+    cookies().set('wakatimeid', body.wakatimeid)
 
-    return NextResponse.json(sql`UPDATE users SET wakatimekey = ${body.wakatimekey} WHERE username = ${username.value}`);
+    return NextResponse.json(sql`UPDATE users SET wakatimekey = ${body.wakatimekey}, wakatimeid = ${body.wakatimeid} WHERE username = ${username.value}`);
 }
