@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@nick22985/wakatime-api": "^1.0.2",
     "@vercel/postgres": "^0.7.2",
     "bcrypt": "^5.1.1",
     "cookies-next": "^4.1.1",
