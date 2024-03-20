@@ -1,13 +1,11 @@
 'use server'
 
 import { cookies } from 'next/headers'
-import { WakaTimeApi, RANGE, SLICE_BY, SUMMARY_RANGE } from "@nick22985/wakatime-api";
 
 const cookieStore = cookies();
 const wakatimekey = cookieStore.get('wakatimekey');
 const wakatimeid = cookieStore.get('wakatimeid');
 
-const client = new WakaTimeApi(wakatimekey.value);
 
 export async function GetWakatimeInfos(){
     // Gérer le Last Login (à la fin)
@@ -28,10 +26,17 @@ export async function GetWakatimeInfos(){
     //     setTodayDate = new Date();
     // }
 
+    let urlWakatime = 'https://wakatime.com/api/v1/users/' + wakatimeid.value + '/stats?api_key=' + wakatimekey.value;
     try {
-        let getUser = await client.getUser("Nathuz_");
-        console.log(getUser);
+        let res = await fetch(urlWakatime);
+        if (!res.ok) {
+            console.error("Error code : " +res.status);
+        } else {
+            let datas = await res.json();
+            console.log(datas.data.languages[0].name);
+            console.log(datas.data.languages[0].hours);
+        }
     } catch (err) {
-        console.error(err);
+        console.error(err)
     }
 }
