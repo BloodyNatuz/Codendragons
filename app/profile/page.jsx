@@ -4,7 +4,6 @@ import { cookies } from 'next/headers'
 import Logout from '../components/client/logout';
 import InputWakatimeKey from '../components/client/inputWakatimeKey';
 import ResetWakatimeKey from '../components/client/resetWakatimeKey';
-import { GetWakatimeInfos } from '../components/server/getWakatimeInfos';
 
 export default async function Profile(){
     const cookieStore = cookies();
@@ -28,7 +27,6 @@ export default async function Profile(){
             }
             <br/>
             <Logout/>
-            <GetWakatimeInfos/>
         </main>
     )
 }
