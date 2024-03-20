@@ -9,7 +9,7 @@ export default function Signin() {
 
   const [formData, setFormData] = useState({
     email: '',
-    password: '',
+    password: ''
   });
 
   // Message states
