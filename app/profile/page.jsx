@@ -5,6 +5,7 @@ import Logout from '../components/client/logout';
 import InputWakatimeKey from '../components/client/inputWakatimeKey';
 import ResetWakatimeKey from '../components/client/resetWakatimeKey';
 import { GetWakatimeInfos } from '../components/server/getWakatimeInfos';
+import ProfileRedirect from './redirection';
 
 export default async function Profile(){
     const cookieStore = cookies();
@@ -15,8 +16,17 @@ export default async function Profile(){
 
     return (
         <main>
-            <p>Username: {username.value}</p>
-            <p>Email: {email.value}</p>
+            {
+                username == undefined || email == undefined
+                ? <ProfileRedirect></ProfileRedirect>
+                : (
+                    <>
+                        <p>Username: {username.value}</p>
+                        <p>Email: {email.value}</p>
+                    </>
+                )
+            }
+
             {
                 wakatimekey == undefined || wakatimeid == undefined
                     ? <InputWakatimeKey/>

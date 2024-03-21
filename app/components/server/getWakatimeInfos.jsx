@@ -26,17 +26,21 @@ export async function GetWakatimeInfos(){
     //     setTodayDate = new Date();
     // }
 
-    let urlWakatime = 'https://wakatime.com/api/v1/users/' + wakatimeid.value + '/stats?api_key=' + wakatimekey.value;
-    try {
-        let res = await fetch(urlWakatime);
-        if (!res.ok) {
-            console.error("Error code : " +res.status);
-        } else {
-            let datas = await res.json();
-            console.log(datas.data.languages[0].name);
-            console.log(datas.data.languages[0].hours);
+    if (wakatimekey == undefined || wakatimeid == undefined) {
+        // Pas d'infos
+    } else{
+        let urlWakatime = 'https://wakatime.com/api/v1/users/' + wakatimeid.value + '/stats?api_key=' + wakatimekey.value;
+        try {
+            let res = await fetch(urlWakatime);
+            if (!res.ok) {
+                console.error("Error code : " +res.status);
+            } else {
+                let datas = await res.json();
+                console.log(datas.data.languages[0].name);
+                console.log(datas.data.languages[0].hours);
+            }
+        } catch (err) {
+            console.error(err)
         }
-    } catch (err) {
-        console.error(err)
     }
 }
