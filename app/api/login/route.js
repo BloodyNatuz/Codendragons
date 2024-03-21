@@ -7,6 +7,7 @@ import { cookies } from 'next/headers';
 import { setCookie } from "cookies-next";
 
 export async function POST(request){
+    'use server'
     const body = await request.json();
     try {
         const myuser = await sql`SELECT * from users WHERE email = ${body.email}`;
