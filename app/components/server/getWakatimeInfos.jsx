@@ -2,12 +2,11 @@
 
 import { cookies } from 'next/headers'
 
-const cookieStore = cookies();
-const wakatimekey = cookieStore.get('wakatimekey');
-const wakatimeid = cookieStore.get('wakatimeid');
-
 
 export async function GetWakatimeInfos(){
+    const cookieStore = cookies();
+    const wakatimekey = cookieStore.get('wakatimekey');
+    const wakatimeid = cookieStore.get('wakatimeid');
     // Gérer le Last Login (à la fin)
     
     // Calculer if temps passé > 14 alors calcule de temps total
