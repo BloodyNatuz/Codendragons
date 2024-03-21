@@ -13,11 +13,12 @@ export default async function Profile(){
     const email = cookieStore.get('email');
     const wakatimekey = cookieStore.get('wakatimekey');
     const wakatimeid = cookieStore.get('wakatimeid')
+    const isLoggedIn = cookieStore.get('isLoggedIn')
 
     return (
         <main>
             {
-                username == undefined || email == undefined
+                username == undefined || email == undefined || isLoggedIn == undefined
                 ? <ProfileRedirect></ProfileRedirect>
                 : (
                     <>
